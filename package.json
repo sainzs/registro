@@ -1,0 +1,20 @@
+{
+  "name": "agent-work-report-workspace",
+  "private": true,
+  "description": "Registro reporting/dashboard workspace for Agent Work Report",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @awr/cli && npm run build -w @awr/web",
+    "typecheck": "npm run typecheck -w @awr/cli && npm run typecheck -w @awr/web",
+    "test": "npm run test -w @awr/cli",
+    "dev:cli": "npm run dev -w @awr/cli",
+    "dev:web": "npm run dev -w @awr/web",
+    "bun:install": "bun install",
+    "bun:dev:cli": "bun packages/cli/src/cli.ts",
+    "bun:dev:web": "bunx vite --config apps/web/vite.config.ts",
+    "bun:test:cli": "cd packages/cli && bun test"
+  }
+}
