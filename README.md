@@ -1,6 +1,10 @@
 # Registro (Agent Work Report Dashboard)
 
-Reporting/dashboard package for agentic engineering tooling.
+[![License: MIT](https://img.shields.io/badge/License-MIT-00ffb2.svg)](LICENSE)
+[![Release](https://img.shields.io/badge/release-v0.1.0-00ffb2.svg)](https://github.com/sainzs/registro/releases)
+[![Random Access Theme](https://img.shields.io/badge/Random%20Access%20Theme-mint-000000.svg?color=00ffb2&labelColor=000000)](https://github.com/sainzs/random-access-themes)
+
+The reporting layer of the Random Access agent toolchain.
 
 ## Package Role
 - `registro` is the reporting surface (CLI snapshots + dashboard visualization).
@@ -71,8 +75,11 @@ source /path/to/repo/packages/registro/packages/cli/shell/agent-work-report.sh
 
 ## Portfolio
 
-Registro is the reporting surface of the Random Access agent-workbench ecosystem:
+registro is the **reporting layer** of the Random Access agent toolchain — four small packages that compose into one maintainer surface:
 
-- [reckoner](https://github.com/sainzs/reckoner) — agent memory, verification, and guardrails package
-- [santiagosainz-skills](https://github.com/sainzs/santiagosainz-skills) — portable maintainer workflows
-- [random-access-themes](https://github.com/sainzs/random-access-themes) — the design system the dashboard and CLI themes are built from
+| Package | Layer | What it does |
+| --- | --- | --- |
+| [santiagosainz-skills](https://github.com/sainzs/santiagosainz-skills) | Workflow | Portable maintainer skills: review, planning, debug, verify, handoff |
+| [reckoner](https://github.com/sainzs/reckoner) | Memory | Agent memory, auto-verification, and guardrails |
+| **registro** | Reporting | Agent work report CLI and dashboard |
+| [random-access-themes](https://github.com/sainzs/random-access-themes) | Design system | OLED-black themes and tokens shared across the toolchain |
