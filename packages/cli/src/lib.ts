@@ -82,7 +82,7 @@ const SECRET_LIKE_NAMES = new Set([
 const SECRET_LIKE_SUFFIXES = new Set([".pem", ".key", ".p12", ".pfx", ".kdbx"]);
 const ANSI_RESET = "\u001b[0m";
 
-export type ThemeName = "auto" | "plain" | "amber" | "ocean" | "matrix";
+export type ThemeName = "auto" | "plain" | "random-access" | "amber" | "ocean" | "matrix";
 
 export interface Theme {
   name: ThemeName | string;
@@ -109,6 +109,19 @@ export interface CliOptions {
 }
 
 const THEME_PRESETS: Record<string, Theme> = {
+  "random-access": {
+    name: "random-access",
+    enabled: true,
+    border: "\u001b[38;2;111;141;134m",
+    title: "\u001b[1;38;2;0;255;178m",
+    section: "\u001b[1;38;2;0;255;178m",
+    accent: "\u001b[38;2;0;255;178m",
+    good: "\u001b[38;2;74;222;128m",
+    warn: "\u001b[38;2;162;229;184m",
+    bad: "\u001b[38;2;38;201;148m",
+    muted: "\u001b[38;2;111;141;134m",
+    reset: ANSI_RESET,
+  },
   amber: {
     name: "amber",
     enabled: true,
@@ -206,11 +219,11 @@ export function resolveTheme(name: ThemeName = "auto", stream: NodeJS.WriteStrea
     if (!supportsColor(stream)) {
       return { name: "plain", enabled: false };
     }
-    const preferred = process.env.AWR_THEME ?? "ocean";
-    return THEME_PRESETS[preferred] ?? THEME_PRESETS.ocean;
+    const preferred = process.env.AWR_THEME ?? "random-access";
+    return THEME_PRESETS[preferred] ?? THEME_PRESETS["random-access"];
   }
 
-  return THEME_PRESETS[name] ?? THEME_PRESETS.ocean;
+  return THEME_PRESETS[name] ?? THEME_PRESETS["random-access"];
 }
 
 function styleText(text: string, role: keyof Theme | "normal", theme: Theme): string {
@@ -1095,8 +1108,8 @@ export function parseArgs(argv: string[]): CliOptions | { version: true } {
     }
     if (current === "--theme") {
       const next = rest.shift();
-      if (!next || !["auto", "plain", "amber", "ocean", "matrix"].includes(next)) {
-        throw new Error("--theme must be one of: auto, plain, amber, ocean, matrix");
+      if (!next || !["auto", "plain", "random-access", "amber", "ocean", "matrix"].includes(next)) {
+        throw new Error("--theme must be one of: auto, plain, random-access, amber, ocean, matrix");
       }
       options.theme = next as ThemeName;
       continue;
@@ -1124,6 +1137,6 @@ export function helpText(): string {
     "  agent-work-report [path] [--json] [--compact] [--tui] [--theme <name>] [--version]",
     "",
     "Themes:",
-    "  auto, plain, amber, ocean, matrix",
+    "  auto, plain, random-access, amber, ocean, matrix",
   ].join("\n");
 }
